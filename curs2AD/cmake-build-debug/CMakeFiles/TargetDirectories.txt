@@ -1,0 +1,3 @@
+/Users/mateisorodoc/Desktop/AD/curs2AD/cmake-build-debug/CMakeFiles/curs2AD.dir
+/Users/mateisorodoc/Desktop/AD/curs2AD/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/mateisorodoc/Desktop/AD/curs2AD/cmake-build-debug/CMakeFiles/rebuild_cache.dir
