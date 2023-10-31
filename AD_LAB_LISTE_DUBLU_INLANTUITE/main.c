@@ -12,10 +12,10 @@ typedef struct nod{
     struct nod *prev;
 } TIP_NOD;
 
-TIP_NOD *q, *first = NULL, *last = NULL, *r;
+TIP_NOD *q, *first = NULL, *last = NULL;
 
 void insert(int k){
-    TIP_NOD *p, *q1;
+    TIP_NOD *p;
     int opt;
     int givenKey;
 
@@ -35,7 +35,7 @@ void insert(int k){
 
         printf("\nChoose where to insert new node:\n");
         printf("\n1. Before first node.\n2. After last node.\n3. Before desired node k1.\n4. After desired node k1\n0. EXIT\n");
-        scanf("%d", &opt);
+        scanf("%d", &opt); //NOLINT
         switch (opt) {
             case 1:
                 p->next = first;
@@ -53,7 +53,7 @@ void insert(int k){
                 break;
             case 3:
                 printf("Please insert the key of the node that you want to insert before: ");
-                scanf("%d", &givenKey);
+                scanf("%d", &givenKey); //NOLINT
                 q = first;
                 while ( q != NULL ) { //searching for the node with the key givenKey
                     if ( q->key == givenKey ) break;
@@ -79,7 +79,7 @@ void insert(int k){
                 break;
             case 4:
                 printf("Please insert the key of the node that you want to insert after: ");
-                scanf("%d", &givenKey);
+                scanf("%d", &givenKey); //NOLINT
                 q = first;
                 while ( q != NULL ) { //searching for the node with the key givenKey
                     if ( q->key == givenKey ) break;
@@ -115,7 +115,7 @@ void insert(int k){
 
 
 void display(){
-    TIP_NOD *tmp = first;
+    TIP_NOD *tmp;
     int opt = -1;
 
     if(q == NULL){
@@ -125,7 +125,7 @@ void display(){
     else {
         while (opt != 0) {
             printf("\nOption:\n1. Forwards\n2.Backwards\n0. Return\n");
-            scanf("%d", &opt);
+            scanf("%d", &opt); //NOLINT
 
             switch (opt) {
                 case 1:
@@ -136,6 +136,9 @@ void display(){
                     for(tmp = last; tmp != NULL; tmp = tmp->prev)
                         printf("%d ", tmp->key);
                     break;
+                default:
+                    printf("ERROR AT DISPLAY");
+                    break;
             }
 
         }
@@ -143,12 +146,9 @@ void display(){
 }
 
 void delete(int givenKey){
-    TIP_NOD *p, *q1;
-    q1 = NULL;
     q = first;
     while ( q != NULL ) { //searching for the node with the key givenKey
         if ( q->key == givenKey ) break;
-        q1 = q;
         q = q->next;
     }
     if(first == q && last == q ){
@@ -198,14 +198,14 @@ int main() {
 
     while (optOp != 0){
         printf("\nChoose what operation you want to make: \n");
-        printf("1. Insert\n2. Display\n3. Save\n4. Delete\n0. EXIT");
+        printf("1. Insert\n2. Display\n3. Save\n4. Delete\n0. EXIT\n");
         printf("\nOption: ");
-        scanf("%d", &optOp);
+        scanf("%d", &optOp); //NOLINT
 
         switch (optOp) {
             case 1:
                 printf("Insert the key for the node you want to create:\n");
-                scanf("%d", &key);
+                scanf("%d", &key); //NOLINT
                 insert(key);
                 break;
             case 2:
@@ -217,7 +217,7 @@ int main() {
                 break;
             case 4:
                 printf("Insert the key for the node you want to DELETE:\n");
-                scanf("%d", &key);
+                scanf("%d", &key); //NOLINT
                 delete(key);
                 break;
             case 0:
