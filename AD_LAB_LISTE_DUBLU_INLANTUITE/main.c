@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <curses.h>
 #include <ctype.h>
-#include <string.h>
 
-//global variables declaration
-
+//Creating new data type TIP_NOD
 typedef struct nod{
     int key;
     struct nod *next;
@@ -14,6 +11,9 @@ typedef struct nod{
 
 TIP_NOD *q, *first = NULL, *last = NULL;
 
+//Creating operations
+
+//INSERT function
 void insert(int k){
     TIP_NOD *p;
     int opt;
@@ -98,7 +98,6 @@ void insert(int k){
                     q->next = p;
                     p->prev = q;
 
-
                 }
                 break;
 
@@ -109,11 +108,9 @@ void insert(int k){
                 printf("\n ERROR!");
         }
     }
-
 }
 
-
-
+//DISPLAY function
 void display(){
     TIP_NOD *tmp;
     int opt = -1;
@@ -140,11 +137,11 @@ void display(){
                     printf("ERROR AT DISPLAY");
                     break;
             }
-
         }
     }
 }
 
+//DELETE function
 void delete(int givenKey){
     q = first;
     while ( q != NULL ) { //searching for the node with the key givenKey
@@ -172,6 +169,7 @@ void delete(int givenKey){
     }
 }
 
+//SAVE_IN_FILE function
 void saveListInFile(){
     FILE *fout = fopen("fileOUT.txt", "w");
     TIP_NOD *tmp;
@@ -190,13 +188,13 @@ void saveListInFile(){
     fclose(fout);
 }
 
-
+//Main code
 int main() {
     int key = 0;
 
-    int optOp= -1;
+    int optOp = -1;
 
-    while (optOp != 0){
+    while (optOp != 0) {
         printf("\nChoose what operation you want to make: \n");
         printf("1. Insert\n2. Display\n3. Save\n4. Delete\n0. EXIT\n");
         printf("\nOption: ");
