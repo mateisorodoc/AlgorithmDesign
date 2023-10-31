@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 typedef struct nod{
     int key;
     struct nod *next;
@@ -12,6 +13,8 @@ int main() {
     last = NULL;
     return 0;
 }
+
+
 
 void create(int k){
     TIP_NOD *p, *q1;
@@ -38,11 +41,32 @@ void create(int k){
         last = p;
 
         //after desired node k1
-        q1 = search(k1);
-        p->next = q1->next;
-        q1->next = p;
+//        q1 = search(k1);
+//        p->next = q1->next;
+//        q1->next = p;
 
-        //before desired node q1
+        q1 = NULL;
+        q = first;
+        while ( q != NULL ) {
+            if ( q->key == givenKey ) break;
+            q1 = q;
+            q = q->next;
+        }
+
+        if( q != NULL){
+            //node with key givenKey has address q
+            if(q == first){
+                //insert after first node
+                p->next = first;
+                first = p;
+            }
+            else {
+                q1->next = p;
+                p->next = q;
+            }
+        }
+
+        //before desired node k1
         //r = previous node, k = cheia de cautat
         q = first;
         r = first;
