@@ -9,7 +9,7 @@ typedef struct nod {
 
 TIP_NOD *q, *first = NULL, *last = NULL;
 
-void create(int k) {
+void insert(int k) {
 
     TIP_NOD *p, *q1;
     int opt;
@@ -156,6 +156,38 @@ void saveListInFile() {
     fclose(fout);
 }
 
+void  readListFromFile(){
+
+    FILE *fin = fopen("fileIN.txt", "r");
+    if(fin == NULL){
+        exit(1);
+    }
+
+    int val;
+    while(fscanf(fin, "%d", &val)>0){ //NOLINT
+
+        TIP_NOD *p = (TIP_NOD *) malloc(sizeof(TIP_NOD));
+
+        if (q == NULL) { //intrare in lista vida
+            p->next = NULL;
+            last = p;
+            first = p;
+            q = p;
+        }
+
+        else {
+            p->key = val;
+            p->next = NULL;
+            last->next = p;
+            last = p;
+        }
+
+    }
+
+
+    fclose(fin);
+}
+
 int main() {
 
     int key = 0;
@@ -165,33 +197,37 @@ int main() {
     while (optOp != 0) {
 
         printf("\nChoose what operation you want to make: \n");
-        printf("1. Create\n2. Display\n3. Save\n4. Delete\n0. EXIT");
-        printf("\nOption: ");
+        printf("\n1. Read from file\n2. Insert node\n3. Display\n4. Save in file\n5. Delete\n0. EXIT\n");
+        printf("\nOption: \n");
 
         scanf("%d", &optOp); //NOLINT
 
         switch (optOp) {
             case 1:
-                printf("Insert the key for the node you want to create:\n");
-                scanf("%d", &key); //NOLINT
-                create(key);
+                printf("\nReading from file fileIN.txt...\n");
+                readListFromFile();
                 break;
             case 2:
-                display();
+                printf("\nInsert the key for the node you want to create:\n");
+                scanf("%d", &key); //NOLINT
+                insert(key);
                 break;
             case 3:
-                saveListInFile();
-                printf("The list has been saved to fileOUT.txt");
+                display();
                 break;
             case 4:
-                printf("Insert the key for the node you want to DELETE:\n");
+                saveListInFile();
+                printf("\nThe list has been saved to fileOUT.txt\n");
+                break;
+            case 5:
+                printf("\nInsert the key for the node you want to DELETE:\n");
                 scanf("%d", &key); //NOLINT
                 delete(key);
                 break;
             case 0:
                 return 0;
             default:
-                printf("\n ERROR!");
+                printf("\nERROR!\n");
         }
     }
     return 0;
